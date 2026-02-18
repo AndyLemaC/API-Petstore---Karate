@@ -1,0 +1,18 @@
+{
+  "id": 9988776655,
+  "category": {
+    "id": 1,
+    "name": "Dogs"
+  },
+  "name": "Rocky",
+  "photoUrls": [
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/YellowLabradorLooking_new.jpg/1200px-YellowLabradorLooking_new.jpg"
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "labrador"
+    }
+  ],
+  "status": "available"
+}

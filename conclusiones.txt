@@ -1,0 +1,39 @@
+﻿HALLAZGOS Y CONCLUSIONES - API PETSTORE (MASCOTAS)
+
+Hallazgos
+
+1. Persistencia y consistencia de datos
+- En Petstore publico, los datos pueden quedar con comportamiento variable entre ejecuciones por concurrencia de otros usuarios.
+- Para reducir colisiones se usan IDs dinamicos por escenario.
+
+2. Flujo dependiente entre operaciones
+- Las operaciones GET, PUT y findByStatus dependen de que el registro previo exista y se actualice correctamente.
+- Se resolvio manteniendo el setup dentro de cada escenario para asegurar independencia.
+
+3. Validaciones del endpoint findByStatus
+- El endpoint retorna colecciones amplias y heterogeneas.
+- Se evita validacion rigida de todos los elementos y se filtra por ID objetivo para validar solo la mascota de prueba.
+
+4. Datos por JSON y parametrizacion
+- Se cumple el requerimiento de entrada por JSON usando pet.json como base.
+- Los campos criticos (id, name, status) se ajustan dinamicamente durante la ejecucion.
+
+Conclusiones
+
+1. Reproducibilidad
+- El ejercicio es reproducible con JDK 11 y Maven 3.9.12 ejecutando mvn clean test.
+- Se incluyen rutas claras de reportes para evidenciar resultados.
+
+2. Confiabilidad del flujo
+- El flujo de 4 casos solicitado (crear, consultar por ID, actualizar, consultar por estatus) queda cubierto y validado en Karate.
+- La estrategia de datos dinamicos mejora estabilidad frente a ejecuciones repetidas.
+
+3. Mantenibilidad
+- Separar datos base en JSON y usar un feature en espanol facilita lectura, mantenimiento y auditoria.
+- La numeracion de escenarios mejora trazabilidad durante revisiones.
+
+4. Recomendaciones
+- Mantener IDs dinamicos para evitar choques en ambiente publico.
+- Si el proyecto crece, separar utilidades y crear features reutilizables por operacion.
+- Integrar la ejecucion en CI/CD y conservar artefactos de target/karate-reports como evidencia.
+- Agregar ejecucion por tags para filtrar corridas por modulo o tipo de prueba.
