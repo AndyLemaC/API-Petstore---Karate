@@ -1,53 +1,99 @@
 ﻿# Ejercicio API Petstore - Karate Framework
 
-El ejercicio contiene archivos, scripts, reportes y los insumos necesarios para su implementacion y reproduccion.
+El ejercicio automatiza pruebas sobre la API pública de [Petstore Swagger](https://petstore.swagger.io/) utilizando **Karate DSL**.
 
-## Tecnologias y versiones
+---
+
+## ✅ Requisitos Previos
 
 - Java JDK: 11
 - Apache Maven: 3.9.12
 - Karate Framework: 1.4.1
 - JUnit 5: 5.9.1
 
-## Estructura principal
+---
+## ⚙️ Configuración del Entorno de Desarrollo
 
-- Feature principal: `src/test/java/petstore/pets/pet.feature`
-- Runner: `src/test/java/petstore/runners/PetTestRunner.java`
-- Configuracion global: `src/test/java/karate-config.js`
-- Datos JSON: `src/test/resources/petstore/pets/pet.json`
-- Configuracion de logs: `logback-test.xml`
-- Hallazgos y conclusiones: `conclusiones.txt`
-
-## Precondiciones
-
-- Tener JDK 11 instalado y configurado en `JAVA_HOME`.
-- Tener Maven 3.9.12 instalado y disponible en `PATH`.
-- Tener conexion a internet (se consume `https://petstore.swagger.io/v2`).
-
-## Ejecucion paso a paso
-
-1. Abrir terminal en la raiz del proyecto.
-2. Ejecutar:
+### 1️⃣ Clonar el Repositorio
 
 ```bash
-mvn clean test
+git clone https://github.com/AndyLemaC/api_test.git
+cd petstore-api-test
 ```
 
-## Cobertura del ejercicio
+### 2️⃣ Configurar IntelliJ IDEA
+
+Instalar los siguientes plugins:
+
+- Maven Integration  
+- Cucumber (Gherkin)  
+- Karate Plugin
+
+### 3️⃣ Importar el Proyecto
+
+1. Abrir IntelliJ IDEA  
+2. Seleccionar **"Open"** y elegir el archivo `pom.xml`  
+3. Marcar la opción **"Open as Project"**
+
+---
+
+## ▶️ Ejecución de Pruebas
+
+### Desde IntelliJ IDEA
+
+1. Navegar a `src/test/java/petstore/runners/UserTestRunner.java`  
+2. Hacer clic derecho y seleccionar **"Run UserTestRunner"**
+
+### Desde Línea de Comandos
+
+```bash
+# Ejecutar todas las pruebas
+mvn clean test
+
+# Ejecutar pruebas con tags y reporte detallado
+mvn clean test -Dkarate.options="--tags ~@ignore"
+```
+
+---
+
+## 🗂️ Estructura del Proyecto
+
+```
+api_petstore/
+├── src/
+│   └── test/
+│       ├── java/
+│       │   ├── karate-config.js                    # Configuracion global de Karate
+│       │   └── petstore/
+│       │       ├── pets/
+│       │       │   ├── pet.feature                 # Escenarios de prueba API Petstore
+│       │       │   └── validate-pet.js             # Utilidad de validacion de mascota
+│       │       └── runners/
+│       │           └── PetTestRunner.java          # Runner de pruebas
+│       └── resources/
+│           └── petstore/
+│               └── pets/
+│                   └── pet.json                    # Datos de prueba en JSON
+├── target/                                         # Carpeta generada por Maven (reportes y resultados)
+├── logback-test.xml                                # Configuracion de logs
+├── pom.xml                                         # Configuracion Maven del proyecto
+├── README.md                                       # Instrucciones de ejecucion
+└── conclusiones.txt                                # Hallazgos y conclusiones del ejercici
+```
+---
+
+## ❓ Cobertura del ejercicio
 
 - 01: Anadir una mascota a la tienda.
 - 02: Consultar la mascota ingresada por ID.
 - 03: Actualizar nombre de mascota y estatus a `sold`.
 - 04: Consultar la mascota modificada por estatus `sold`.
 
-## Reportes
+---
+
+## 📊 Reportes
 
 - Reporte principal Karate: `target/karate-reports/karate-summary.html`
 - Reporte detallado del feature: `target/karate-reports/petstore.pets.pet.html`
 - Resultado de ejecucion Maven/Surefire: `target/surefire-reports/`
 
-## Notas
-
-- Los datos del request se cargan desde JSON y se parametrizan en ejecucion.
-- Los escenarios estan en espanol y numerados para trazabilidad.
-- Si vuelves a ejecutar, Maven regenera los reportes en la carpeta `target`.
