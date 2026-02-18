@@ -17,7 +17,7 @@ El ejercicio automatiza pruebas sobre la API pública de [Petstore Swagger](http
 ### 1️⃣ Clonar el Repositorio
 
 ```bash
-git clone https://github.com/AndyLemaC/api_test.git
+git clone https://github.com/AndyLemaC/API-Petstore---Karate.git
 cd petstore-api-test
 ```
 
